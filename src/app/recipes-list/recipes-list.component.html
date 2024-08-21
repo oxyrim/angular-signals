@@ -2,6 +2,7 @@
   <div class="col-3">
     <app-recipes-filter
       [(filterCriteria)]="filterCriteria"
+      (filterCriteriaChange)="update()"
     ></app-recipes-filter>
   </div>
   <div class="col-9">
