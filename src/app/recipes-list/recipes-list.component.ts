@@ -42,7 +42,8 @@ export class RecipesListComponent {
     this.sharedDataService.updateSelectedRecipe(recipe.id);
     this.router.navigate(['/recipes/details']);
   }
+
   update() {
-    alert('hello')
+    console.info(this.filterCriteria());
   }
 }
