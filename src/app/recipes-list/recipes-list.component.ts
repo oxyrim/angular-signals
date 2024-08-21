@@ -1,12 +1,11 @@
-import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { RecipesService } from '../core/services/recipes.service';
 import { CommonModule } from '@angular/common';
 import { NgbRatingConfig, NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
-import { combineLatest } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { Recipe } from '../core/model/recipe';
 import { SharedDataService } from '../core/services/shared-data.service';
 import { Router } from '@angular/router';
+import { RecipesFilterComponent } from '../recipes-filter/recipes-filter.component';
 
 @Component({
   selector: 'app-recipes-list',
@@ -14,6 +13,7 @@ import { Router } from '@angular/router';
   imports: [
     CommonModule,
     NgbRatingModule,
+    RecipesFilterComponent
   ],
   templateUrl: './recipes-list.component.html',
   styleUrl: './recipes-list.component.scss',
@@ -25,7 +25,7 @@ export class RecipesListComponent {
   private router = inject(Router)
 
   recipes = this.service.recipes;
-  filterRecipe = this.service.filterRecipe;
+  filterCriteria = signal('');
 
   constructor(config: NgbRatingConfig) {
     config.max = 5;
@@ -33,7 +33,7 @@ export class RecipesListComponent {
   }
 
   filteredRecipes = computed(() => {
-    const filterTitle = this.filterRecipe().title?.toLocaleLowerCase() ?? '';
+    const filterTitle = this.filterCriteria().toLocaleLowerCase() ?? '';
     return this.recipes().filter(recipe =>
       recipe?.title?.toLowerCase().includes(filterTitle));
   });

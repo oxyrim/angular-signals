@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, input, model } from '@angular/core';
 import { Recipe } from '../../core/model/recipe';
 
 @Component({
@@ -9,5 +9,6 @@ import { Recipe } from '../../core/model/recipe';
   styleUrl: './card.component.scss'
 })
 export class CardComponent {
-  recipe = input.required<Recipe | undefined>()
+  recipe = input.required<Recipe | undefined>();
+  title = model('');
 }
