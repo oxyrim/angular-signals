@@ -1,0 +1,16 @@
+@if(recipe(); as recipe){
+<div class="d-flex justify-content-center">
+  <div class="card m-5">
+    <img class="card-img-top" [src]="recipe.imageUrl" alt="recipe.title" />
+    <div class="card-body">
+      <h5 class="card-title">{{ recipe?.title }}</h5>
+      <h6 class="card-subtitle mb-2 text-muted">{{ recipe?.title }}</h6>
+      <div class="card-footer d-flex justify-content-between">
+        <h5>{{ recipe?.prepTime }}min</h5>
+        <i class="bi bi-heart"></i>
+      </div>
+    </div>
+  </div>
+</div>
+
+}
